@@ -6,8 +6,8 @@ using Vidly.Models;
 
 namespace Vidly.ViewModels
 {
-    public class CustomersIndexViewModel
+    public class MoviesIndexViewModel
     {
-        public IEnumerable<Customer> Customers { get; set; }
+        public IEnumerable<Movie> Movies { get; set; }
     }
 }
