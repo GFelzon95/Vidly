@@ -5,7 +5,7 @@
 }
 
 <h2>Customers</h2>
-@if(Model.Customers.Count == 0)
+@if(Model.Customers.Count() == 0)
             {
                 <p>We don't have any customers yet.</p>
             }
@@ -22,7 +22,7 @@ else
         @foreach (var customer in Model.Customers)
         {
             <tr>
-                <td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)</td>
+                <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>
                 <td>@customer.MembershipType.Name</td>
             </tr>
         }
