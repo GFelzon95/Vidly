@@ -12,6 +12,7 @@ namespace Vidly.Models
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Title")]
         public String Name { get; set; }
 
         public DateTime ReleaseDate { get; set; }
@@ -20,6 +21,7 @@ namespace Vidly.Models
         public Genre Genre { get; set; }
 
         [Required]
+        [Display(Name = "Genre")]
         public byte GenreId { get; set; }
     }
 }

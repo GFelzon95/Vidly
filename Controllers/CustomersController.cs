@@ -32,10 +32,10 @@ namespace Vidly.Controllers
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
-            //var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
             var viewModel = new CustomerFormViewModel()
             {
-                //Customer = customer,
+                Customer = new Customer(),
                 Membershiptypes = membershipTypes
             };
 
