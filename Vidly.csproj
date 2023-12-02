@@ -237,6 +237,10 @@
     <Compile Include="Migrations\202309300232265_PopulateGenreTable.designer.cs">
       <DependentUpon>202309300232265_PopulateGenreTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312021432430_SeedUsers.cs" />
+    <Compile Include="Migrations\202312021432430_SeedUsers.designer.cs">
+      <DependentUpon>202312021432430_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -679,7 +683,7 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Customers\Details.cshtml" />
-    <Content Include="Views\Movies\Index.cshtml" />
+    <Content Include="Views\Movies\List.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Customers\CustomerForm.cshtml" />
     <Content Include="Views\Movies\MovieForm.cshtml" />
@@ -693,6 +697,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Movies\ReadOnlyList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -730,6 +735,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309300232265_PopulateGenreTable.resx">
       <DependentUpon>202309300232265_PopulateGenreTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312021432430_SeedUsers.resx">
+      <DependentUpon>202312021432430_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
