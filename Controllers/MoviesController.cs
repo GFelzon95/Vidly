@@ -51,17 +51,20 @@ namespace Vidly.Controllers
             if(movie.Id == 0)
             {
                 movie.DateAdded = DateTime.Now;
+                movie.NumberAvailable = movie.NumberInStock;
                 _context.Movies.Add(movie);
             }
 
             else
             {
                 var movieInDb = _context.Movies.SingleOrDefault(m => m.Id == movie.Id);
+                var numberInStockDifference = movie.NumberInStock - movieInDb.NumberInStock;
 
                 movieInDb.Name = movie.Name;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
                 movieInDb.GenreId = movie.GenreId;
                 movieInDb.NumberInStock = movie.NumberInStock;
+                movieInDb.NumberAvailable += numberInStockDifference;
             }
 
             _context.SaveChanges();

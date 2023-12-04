@@ -25,6 +25,8 @@ namespace Vidly.ViewModels
         [Display(Name = "Number in Stock")]
         public int? NumberInStock { get; set; }
 
+        public int NumberAvailable { get; set; }
+
         [Required]
         [Display(Name = "Genre")]
         public byte? GenreId { get; set; }
@@ -54,6 +56,7 @@ namespace Vidly.ViewModels
             ReleaseDate = movie.ReleaseDate;
             NumberInStock = movie.NumberInStock;
             GenreId = movie.GenreId;
+            NumberAvailable = movie.NumberAvailable;
         }
     }
 }

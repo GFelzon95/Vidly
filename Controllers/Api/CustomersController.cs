@@ -28,7 +28,7 @@ namespace Vidly.Controllers.Api
                 .Select(Mapper.Map<Customer, CustomerDto>);
         }
 
-        //GET api/customers/1
+        //GET api/customers/{id}
         public IHttpActionResult GetCustomer(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);

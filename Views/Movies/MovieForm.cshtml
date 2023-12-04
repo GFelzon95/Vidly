@@ -40,6 +40,13 @@
             @Html.ValidationMessageFor(m => m.NumberInStock)
         </div>
     </p>
+
+    <p>
+        <div class="form-group">
+            @Html.LabelFor(m => m.NumberAvailable)
+            @Html.TextBoxFor(m => m.NumberAvailable, new {@class = "form-control",@disabled = "true"})
+        </div>
+    </p>
     
     @Html.HiddenFor(m => m.Id)
     @Html.AntiForgeryToken()

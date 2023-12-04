@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using Vidly.Models;
 using Vidly.ViewModels;
+using System.Runtime.Caching;
 
 namespace Vidly.Controllers
 {
@@ -118,5 +119,7 @@ namespace Vidly.Controllers
             };
             return View(viewModel);
         }
+
+
     }
 }

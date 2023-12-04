@@ -946,7 +946,7 @@ $.extend( $.validator, {
 				error = $( "<" + this.settings.errorElement + ">" )
 					.attr( "id", elementID + "-error" )
 					.addClass( this.settings.errorClass )
-					.html( message || "" );
+					.html(message || "");
 
 				// Maintain reference to the element to be placed into the DOM
 				place = error;
