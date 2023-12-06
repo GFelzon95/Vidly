@@ -1,0 +1,40 @@
+﻿.bg-dark {
+    background-color: #3997db !important;
+    border-color: #0c7dd7;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(255 255 255);
+}
+
+.tt-suggestion:hover {
+    background-color: #66c7eb;
+}
+
+.form-control{
+    border-radius: 0.5rem;
+}
+
+.form-control:focus {
+    border: solid 2px;
+    border-color: #0c7dd7;
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-inline {
+    display:block;
+}
+
+.dataTables_length > label,
+.dataTables_filter > label{
+    display: block;
+}
+
+.dataTables_filter > label,
+.dataTables_paginate > ul.pagination{
+   position: absolute;
+   right: 25px;
+}
+
+
