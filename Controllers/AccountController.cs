@@ -10,20 +10,24 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Vidly.Models;
+using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext _context;
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+       public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -140,7 +144,11 @@ namespace Vidly.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var roles = _context.Roles.ToList();
+
+            var viewModel = new RegisterViewModel() { Roles = roles };
+
+            return View(viewModel);
         }
 
         //
@@ -152,13 +160,17 @@ namespace Vidly.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser 
-                { 
-                    UserName = model.Email, 
+                var SiteIds = _context.Users.Select(x => x.SiteId).ToArray();
+                var maxSiteId = SiteIds.Max();
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
                     Email = model.Email,
                     DrivingLicense = model.DrivingLicense,
-                    Phone = model.Phone
+                    Phone = model.Phone,
+                    SiteId = maxSiteId + 1
                 };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -175,9 +187,15 @@ namespace Vidly.Controllers
                     //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    
+                    //var roles = await this.UserManager.GetRolesAsync(user.Id);
+                    //await this.UserManager.RemoveFromRolesAsync(user.Id,roles.ToArray());
+                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRole);
 
                     return RedirectToAction("Index", "Home");
                 }
+
+
                 AddErrors(result);
             }
 
@@ -450,6 +468,8 @@ namespace Vidly.Controllers
 
         protected override void Dispose(bool disposing)
         {
+            _context.Dispose();
+
             if (disposing)
             {
                 if (_userManager != null)

@@ -1,0 +1,26 @@
+﻿@model Vidly.ViewModels.UsersListViewModel
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Users List</h2>
+<table id="users" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>User Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+                <tr>
+                    <td>@Html.ActionLink(user.Email, "Edit", new {id = user.SiteId })</td>
+                </tr>
+               
+                
+            }
+    </tbody>
+</table>
+
+

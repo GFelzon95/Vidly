@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Profile;
 using System.Xml.Linq;
 
 namespace Vidly.ViewModels
@@ -23,6 +25,13 @@ namespace Vidly.ViewModels
         public string Email { get; set; }
 
         [Required]
+        public int SiteId { get; set; }
+
+        [Required]
+        [Display(Name = "User Role")]
+        public string UserRole { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -32,5 +41,8 @@ namespace Vidly.ViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
+        public IEnumerable<IdentityRole> Roles { get; set;}
     }
 }

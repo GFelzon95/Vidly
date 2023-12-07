@@ -82,6 +82,9 @@
                 display: 'name',
                 source: movies
             }).on("typeahead:select", function (e, movie) {
+                if (vm.movieIds.length >= 5) {
+                    return toastr.success("Can't exceed 5 movies at a time")
+                }
                 $("#movies").append("<li class = 'list-group-item'>" + movie.name + "</li>");
 
                 $("#movie").typeahead("val", "");

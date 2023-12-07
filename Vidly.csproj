@@ -206,11 +206,13 @@
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\Api\MoviesController.cs" />
     <Compile Include="Controllers\Api\NewRentalsController.cs" />
+    <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\RentalsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Dtos\CustomerDto.cs" />
     <Compile Include="Dtos\GenreDto.cs" />
     <Compile Include="Dtos\MembershipTypeDto.cs" />
@@ -280,6 +282,14 @@
     <Compile Include="Migrations\202312040539162_AddNumberAvailableInMovies.designer.cs">
       <DependentUpon>202312040539162_AddNumberAvailableInMovies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312070623201_AddSiteIdToUser.cs" />
+    <Compile Include="Migrations\202312070623201_AddSiteIdToUser.designer.cs">
+      <DependentUpon>202312070623201_AddSiteIdToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202312070814596_SeedRoles.cs" />
+    <Compile Include="Migrations\202312070814596_SeedRoles.designer.cs">
+      <DependentUpon>202312070814596_SeedRoles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -302,6 +312,8 @@
     <Compile Include="ViewModels\MoviesIndexViewModel.cs" />
     <Compile Include="ViewModels\RandomMovieViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\UsersEditViewModel.cs" />
+    <Compile Include="ViewModels\UsersListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="404.html" />
@@ -703,6 +715,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Movies\ReadOnlyList.cshtml" />
     <Content Include="Views\Rentals\New.cshtml" />
+    <Content Include="Views\Users\List.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
     <None Include="Web.Testing.config" />
   </ItemGroup>
   <ItemGroup>
@@ -757,6 +771,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202312040539162_AddNumberAvailableInMovies.resx">
       <DependentUpon>202312040539162_AddNumberAvailableInMovies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312070623201_AddSiteIdToUser.resx">
+      <DependentUpon>202312070623201_AddSiteIdToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312070814596_SeedRoles.resx">
+      <DependentUpon>202312070814596_SeedRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
