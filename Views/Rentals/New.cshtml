@@ -43,9 +43,13 @@
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
-                prefetch: {
-                    url: '/api/customers',
-                    cache:false
+                //prefetch: {
+                //    url: '/api/customers',
+                //    cache:false
+                //}
+                remote: {
+                    url: '/api/customers?query=%QUERY',
+                    wildcard: '%QUERY'
                 }
             });
 
@@ -71,6 +75,11 @@
                 display: 'name',
                 source: customers
             }).on("typeahead:select", function (e, customer) {
+                if (customer.badCustomer === true) {
+                    $("#customer").typeahead("val", "");
+                    return toastr.error("The customer has a bad record.");
+                }
+                console.log(customer)
                 vm.customerId = customer.id;
             });
 
@@ -83,7 +92,7 @@
                 source: movies
             }).on("typeahead:select", function (e, movie) {
                 if (vm.movieIds.length >= 5) {
-                    return toastr.success("Can't exceed 5 movies at a time")
+                    return toastr.error("Can't exceed 5 movies at a time")
                 }
                 $("#movies").append("<li class = 'list-group-item'>" + movie.name + "</li>");
 
@@ -123,7 +132,7 @@
                             validator.resetForm();
                         })
                         .fail(function () {
-                            toastr.success("Something unexpected happened.")
+                            toastr.error("Something unexpected happened.")
                         });
 
                     return false;

@@ -290,6 +290,14 @@
     <Compile Include="Migrations\202312070814596_SeedRoles.designer.cs">
       <DependentUpon>202312070814596_SeedRoles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312080725457_AddedBadCustomerToCustomerModel.cs" />
+    <Compile Include="Migrations\202312080725457_AddedBadCustomerToCustomerModel.designer.cs">
+      <DependentUpon>202312080725457_AddedBadCustomerToCustomerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202312080941454_FixBadCustomerColumnName.cs" />
+    <Compile Include="Migrations\202312080941454_FixBadCustomerColumnName.designer.cs">
+      <DependentUpon>202312080941454_FixBadCustomerColumnName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -777,6 +785,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202312070814596_SeedRoles.resx">
       <DependentUpon>202312070814596_SeedRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312080725457_AddedBadCustomerToCustomerModel.resx">
+      <DependentUpon>202312080725457_AddedBadCustomerToCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312080941454_FixBadCustomerColumnName.resx">
+      <DependentUpon>202312080941454_FixBadCustomerColumnName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

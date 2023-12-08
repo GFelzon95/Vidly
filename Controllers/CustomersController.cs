@@ -7,6 +7,7 @@ using System.Data.Entity;
 using Vidly.Models;
 using Vidly.ViewModels;
 using System.Runtime.Caching;
+using Microsoft.AspNet.Identity;
 
 namespace Vidly.Controllers
 {
@@ -30,6 +31,7 @@ namespace Vidly.Controllers
         //        new Customer {Id = 2, Name = "Mary Williams"}
         //    };
 
+        [Authorize(Roles = RoleName.Employee)]
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
@@ -71,6 +73,7 @@ namespace Vidly.Controllers
                 customerInDb.BirthDate = customer.BirthDate;
                 customerInDb.MembershipTypeId = customer.MembershipTypeId;
                 customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+                customerInDb.BadCustomer = customer.BadCustomer;
 
             }
 

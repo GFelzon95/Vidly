@@ -24,5 +24,9 @@ namespace Vidly.Models
 
         [Display(Name = "Membership Type")]
         public byte MembershipTypeId { get; set; }
+
+        public bool BadCustomer { get; set; }
+
+
     }
 }

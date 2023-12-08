@@ -9,6 +9,7 @@ using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
+    
     public class MoviesController : Controller
     {
         private ApplicationDbContext _context;
@@ -23,7 +24,6 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
-        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var viewModel = new MovieFormViewModel() 
@@ -71,8 +71,7 @@ namespace Vidly.Controllers
 
             return RedirectToAction("Index","Movies");
         }
-
-        [Authorize(Roles = RoleName.CanManageMovies)]
+        [Authorize(Roles = RoleName.Manager + RoleName.Admin)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
@@ -113,12 +112,13 @@ namespace Vidly.Controllers
 
         public ActionResult Index()
         {
-            if (User.IsInRole(RoleName.CanManageMovies))
-                return View("List");
+            if (User.IsInRole(RoleName.Employee))
+                return View("ReadOnlyList");
             
-            return View("ReadOnlyList");
+            return View("List");
         }
 
+        [Authorize(Roles = RoleName.Admin + RoleName.Manager)]
         public ActionResult Details(int id)
         {
             var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);

@@ -41,6 +41,14 @@
         </div>
     </p>
 
+    <p>
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(m => m.Customer.BadCustomer) Bad Customer?
+            </label>
+        </div>
+    </p>
+
 
     @Html.HiddenFor(m => m.Customer.Id)
     @Html.AntiForgeryToken()
@@ -49,5 +57,5 @@
 }
 
 @section scripts{
- @Scripts.Render("~/bundles/jqueryval")   
-    }
+    @Scripts.Render("~/bundles/jqueryval")
+}

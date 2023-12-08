@@ -76,7 +76,7 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Save(UsersEditViewModel user)
         {
             if (!ModelState.IsValid)
