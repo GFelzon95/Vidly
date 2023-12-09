@@ -302,6 +302,14 @@
     <Compile Include="Migrations\202312090326215_AddedPriceToMovieClass.designer.cs">
       <DependentUpon>202312090326215_AddedPriceToMovieClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312090547369_AddTotalPriceToRentalModel.cs" />
+    <Compile Include="Migrations\202312090547369_AddTotalPriceToRentalModel.designer.cs">
+      <DependentUpon>202312090547369_AddTotalPriceToRentalModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202312090644006_FixPriceNameInRentalModel.cs" />
+    <Compile Include="Migrations\202312090644006_FixPriceNameInRentalModel.designer.cs">
+      <DependentUpon>202312090644006_FixPriceNameInRentalModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -798,6 +806,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202312090326215_AddedPriceToMovieClass.resx">
       <DependentUpon>202312090326215_AddedPriceToMovieClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312090547369_AddTotalPriceToRentalModel.resx">
+      <DependentUpon>202312090547369_AddTotalPriceToRentalModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312090644006_FixPriceNameInRentalModel.resx">
+      <DependentUpon>202312090644006_FixPriceNameInRentalModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

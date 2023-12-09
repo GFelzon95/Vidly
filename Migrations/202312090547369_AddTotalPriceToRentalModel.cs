@@ -1,0 +1,18 @@
+﻿namespace Vidly.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class AddTotalPriceToRentalModel : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.Rentals", "TotalPrice", c => c.Decimal(nullable: false, precision: 18, scale: 2));
+        }
+        
+        public override void Down()
+        {
+            DropColumn("dbo.Rentals", "TotalPrice");
+        }
+    }
+}

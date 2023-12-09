@@ -24,6 +24,8 @@ namespace Vidly.Controllers.Api
 
             var movies = _context.Movies.Where(m => newRental.MovieIds.Contains(m.Id)).ToList();
 
+            var Price = newRental.Price;
+
             foreach(var movie in movies)
             {
                 if(movie.NumberAvailable == 0)
@@ -35,6 +37,7 @@ namespace Vidly.Controllers.Api
                 {
                     Customer = customer,
                     Movie = movie,
+                    Price = movie.Price,
                     DateRented = DateTime.Now
                 };
 

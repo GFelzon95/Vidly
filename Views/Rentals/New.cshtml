@@ -23,10 +23,11 @@
     <div class="row">
         <div class="col-md-4">
             <ul id="movies" class="list-group"></ul>
+            <div id="priceContainer"></div>
         </div>
     </div>
 
-        <button class="btn btn-primary tt-button">Submit</button>
+    <button class="btn btn-primary tt-button">Submit</button>
 </form>
 
 @section scripts 
@@ -34,11 +35,30 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        $(document).ready(function () {
+       
 
+        $(document).ready(function () {
             var vm = {
-                movieIds: []
+                movieIds: [],
             };
+            var totalRentalPrice = 0;
+
+            function getTotalPrice(priceSum, moviePrice) {
+                if ($("#priceContainer").html() === "") {
+                    priceSum = moviePrice
+
+                    $("#priceContainer").append("<div class = 'list-group-item movieElement'><p style = 'font-weight:bold'>Total Price</p><p class = 'price totalPrice'>$" + priceSum + "</p></div>");
+                    totalRentalPrice = priceSum;
+                } else {
+                    priceSum += moviePrice
+
+                    $(".totalPrice")
+                        .empty()
+                        .append("$" + priceSum);
+
+                    totalRentalPrice = priceSum;
+                }
+            }
 
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -79,7 +99,6 @@
                     $("#customer").typeahead("val", "");
                     return toastr.error("The customer has a bad record.");
                 }
-                console.log(customer)
                 vm.customerId = customer.id;
             });
 
@@ -94,7 +113,11 @@
                 if (vm.movieIds.length >= 5) {
                     return toastr.error("Can't exceed 5 movies at a time")
                 }
-                $("#movies").append("<li class = 'list-group-item'>" + movie.name + "</li>");
+
+                $("#movies").append("<li class = 'list-group-item movieElement'><p>" + movie.name + "</p><p class = 'price'>$" + movie.price + "</p></li>");
+
+                getTotalPrice(totalRentalPrice, movie.price);
+                console.log(vm.totalPrice)
 
                 $("#movie").typeahead("val", "");
 

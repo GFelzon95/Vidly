@@ -19,5 +19,6 @@ namespace Vidly.Models
         public DateTime DateRented { get; set; }
 
         public DateTime? DateReturned { get; set; }
+        public decimal Price { get; set; }
     }
 }
