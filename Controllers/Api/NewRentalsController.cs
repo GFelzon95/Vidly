@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using Vidly.Models;
 using Vidly.Dtos;
+using System.Data.Entity;
 
 namespace Vidly.Controllers.Api
 {
@@ -20,11 +21,11 @@ namespace Vidly.Controllers.Api
         [HttpPost]
         public IHttpActionResult CreateNewRentals(RentalDto newRental)
         {
-            var customer = _context.Customers.Single(c => c.Id == newRental.CustomerId);
+            var customer = _context.Customers.Include(c => c.MembershipType).Single(c => c.Id == newRental.CustomerId);
 
             var movies = _context.Movies.Where(m => newRental.MovieIds.Contains(m.Id)).ToList();
 
-            var Price = newRental.Price;
+            var discountRate = (decimal) customer.MembershipType.DiscountRate/100;
 
             foreach(var movie in movies)
             {
@@ -37,7 +38,7 @@ namespace Vidly.Controllers.Api
                 {
                     Customer = customer,
                     Movie = movie,
-                    Price = movie.Price,
+                    Price = Math.Round(movie.Price - movie.Price*discountRate, 2),
                     DateRented = DateTime.Now
                 };
 

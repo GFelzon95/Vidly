@@ -9,7 +9,8 @@
     <div class="form-group">
         <label>Customer</label>
         <div class="tt-container">
-            <input id="customer" name="customer" data-rule-validCustomer="true" required type="text" value="" class="form-control" />
+            <input id="customer" name="customer" data-rule-validCustomer="true" required type="text" value="" class="form-control"/>
+            <span id="customerDiscountRate"></span>
         </div>
     </div>
 
@@ -42,19 +43,20 @@
                 movieIds: [],
             };
             var totalRentalPrice = 0;
+            var membershipDiscountRate = 0;
 
             function getTotalPrice(priceSum, moviePrice) {
                 if ($("#priceContainer").html() === "") {
                     priceSum = moviePrice
 
-                    $("#priceContainer").append("<div class = 'list-group-item movieElement'><p style = 'font-weight:bold'>Total Price</p><p class = 'price totalPrice'>$" + priceSum + "</p></div>");
+                    $("#priceContainer").append("<div class = 'list-group-item movieElement'><p style = 'font-weight:bold'>Total Price</p><p class = 'price totalPrice'>$" + priceSum.toFixed(2) + "</p></div>");
                     totalRentalPrice = priceSum;
                 } else {
-                    priceSum += moviePrice
+                    priceSum += +moviePrice
 
                     $(".totalPrice")
                         .empty()
-                        .append("$" + priceSum);
+                        .append("$" + priceSum.toFixed(2));
 
                     totalRentalPrice = priceSum;
                 }
@@ -96,10 +98,23 @@
                 source: customers
             }).on("typeahead:select", function (e, customer) {
                 if (customer.badCustomer === true) {
+                    $("#customerDiscountRate").empty();
                     $("#customer").typeahead("val", "");
                     return toastr.error("The customer has a bad record.");
                 }
+                var discountRate = customer.membershipType.discountRate
+
+                $("#customerDiscountRate")
+                    .empty()
+                    .append(`customer discount rate: ${discountRate}%`);
+
+                membershipDiscountRate = discountRate / 100;
+
                 vm.customerId = customer.id;
+
+                $("#movie").typeahead("val", "");
+                $("#movies").empty();
+                $("#priceContainer").empty();
             });
 
             $('#movie').typeahead({
@@ -110,14 +125,16 @@
                 display: 'name',
                 source: movies
             }).on("typeahead:select", function (e, movie) {
+                var moviePrice = (movie.price - movie.price * membershipDiscountRate);
+
                 if (vm.movieIds.length >= 5) {
                     return toastr.error("Can't exceed 5 movies at a time")
                 }
 
-                $("#movies").append("<li class = 'list-group-item movieElement'><p>" + movie.name + "</p><p class = 'price'>$" + movie.price + "</p></li>");
+                $("#movies").append("<li class = 'list-group-item movieElement'><p>" + movie.name + "</p><p class = 'price'>$" + moviePrice.toFixed(2) + "</p></li>");
 
-                getTotalPrice(totalRentalPrice, movie.price);
-                console.log(vm.totalPrice)
+                getTotalPrice(totalRentalPrice, moviePrice);
+                console.log(moviePrice)
 
                 $("#movie").typeahead("val", "");
 
@@ -149,6 +166,8 @@
                             $("#customer").typeahead("val", "");
                             $("#movie").typeahead("val", "");
                             $("#movies").empty();
+                            $("#priceContainer").empty();
+                            $("#customerDiscountRate").empty();
 
                             vm = { movieIds: [] };
 
