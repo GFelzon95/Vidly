@@ -6,10 +6,11 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using Vidly.Models;
 using Vidly.ViewModels;
+using System.Web.UI.WebControls.WebParts;
+using Microsoft.AspNet.Identity;
 
 namespace Vidly.Controllers
 {
-    
     public class MoviesController : Controller
     {
         private ApplicationDbContext _context;
@@ -63,6 +64,7 @@ namespace Vidly.Controllers
                 movieInDb.Name = movie.Name;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
                 movieInDb.GenreId = movie.GenreId;
+                movieInDb.Price = movie.Price;
                 movieInDb.NumberInStock = movie.NumberInStock;
                 movieInDb.NumberAvailable += numberInStockDifference;
             }
@@ -71,7 +73,7 @@ namespace Vidly.Controllers
 
             return RedirectToAction("Index","Movies");
         }
-        [Authorize(Roles = RoleName.Manager + RoleName.Admin)]
+        [Authorize(Roles = RoleName.Admin + ", " + RoleName.Manager)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
@@ -118,7 +120,6 @@ namespace Vidly.Controllers
             return View("List");
         }
 
-        [Authorize(Roles = RoleName.Admin + RoleName.Manager)]
         public ActionResult Details(int id)
         {
             var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);

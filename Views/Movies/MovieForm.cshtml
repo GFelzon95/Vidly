@@ -5,7 +5,7 @@
 }
 
 <h2>@Model.Title</h2>
-    
+
 
 @using (Html.BeginForm("Save", "Movies"))
 {
@@ -16,15 +16,15 @@
             @Html.ValidationMessageFor(m => m.Name)
         </div>
     </p>
-    
+
     <p>
         <div class="form-group">
             @Html.LabelFor(m => m.ReleaseDate)
-            @Html.TextBoxFor(m => m.ReleaseDate,"{0:d MMM yyyy}", new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.ReleaseDate)
         </div>
     </p>
-    
+
     <p>
         <div class="form-group">
             @Html.LabelFor(m => m.GenreId)
@@ -32,7 +32,7 @@
             @Html.ValidationMessageFor(m => m.GenreId, "Please select a Genre")
         </div>
     </p>
-    
+
     <p>
         <div class="form-group">
             @Html.LabelFor(m => m.NumberInStock)
@@ -44,10 +44,17 @@
     <p>
         <div class="form-group">
             @Html.LabelFor(m => m.NumberAvailable)
-            @Html.TextBoxFor(m => m.NumberAvailable, new {@class = "form-control",@disabled = "true"})
+            @Html.TextBoxFor(m => m.NumberAvailable, new { @class = "form-control", @disabled = "true" })
         </div>
     </p>
-    
+
+    <p>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Price)
+            @Html.TextBoxFor(m => m.Price, new { @class = "form-control"})
+        </div>
+    </p>
+
     @Html.HiddenFor(m => m.Id)
     @Html.AntiForgeryToken()
 
@@ -56,5 +63,5 @@
 
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
-    }
+}
 

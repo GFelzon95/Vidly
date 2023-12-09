@@ -28,6 +28,9 @@ namespace Vidly.ViewModels
         public int NumberAvailable { get; set; }
 
         [Required]
+        public decimal Price { get; set; }
+
+        [Required]
         [Display(Name = "Genre")]
         public byte? GenreId { get; set; }
         public IEnumerable<Genre> Genres { get; set; }
@@ -57,6 +60,7 @@ namespace Vidly.ViewModels
             NumberInStock = movie.NumberInStock;
             GenreId = movie.GenreId;
             NumberAvailable = movie.NumberAvailable;
+            Price = movie.Price;
         }
     }
 }

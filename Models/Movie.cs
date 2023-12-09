@@ -31,5 +31,8 @@ namespace Vidly.Models
         [Required]
         [Display(Name = "Genre")]
         public byte GenreId { get; set; }
+
+        [Required]        
+        public decimal Price { get; set; }
     }
 }
