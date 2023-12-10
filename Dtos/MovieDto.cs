@@ -19,6 +19,7 @@ namespace Vidly.Dtos
         [Required]
         public DateTime ReleaseDate { get; set; }
 
+        public int NumberAvailable { get; set; }
         [Required]
         [Range(1, 20)]
         public int NumberInStock { get; set; }

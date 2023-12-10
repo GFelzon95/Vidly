@@ -127,6 +127,10 @@
             }).on("typeahead:select", function (e, movie) {
                 var moviePrice = (movie.price - movie.price * membershipDiscountRate);
 
+                if (movie.numberAvailable <= 0) {
+                    return toastr.error("Movie is not available.");
+                }
+
                 if (vm.movieIds.length >= 5) {
                     return toastr.error("Can't exceed 5 movies at a time")
                 }

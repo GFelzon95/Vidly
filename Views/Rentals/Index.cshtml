@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Rentals</h2>
+
+<p>
+    @Html.ActionLink("New Rental","New","Rentals",new {@class = "btn btn-primary"})
+</p>
+
+<table id="rentals" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Rental Id</th>
+            <th>Customer</th>
+            <th>Movie</th>
+            <th>Date Rented</th>
+            <th>Date Returned</th>
+            <th>Status</th>
+            <th>Return</th>
+        </tr>
+    </thead>
+</table>
+
+@section scripts
+    {
+        <script>
+            $(document).ready(function () {
+                let table = $("#rentals").DataTable({
+                    ajax: {
+                        url: "/api/rentals",
+                        dataSrc: ""
+                    },
+                    columns: [
+                        {
+                            data: "id"
+                            
+                        },
+                        {
+                            data: "customer.name"
+                        },
+                        {
+                            data: "movie.name",
+                        },
+                        {
+                            data: "dateRented",
+                            render: function (data) {
+                                const date = new Date(data)
+
+                                return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+                            }
+                        },
+                        {
+                            data: "dateReturned",
+                            render: function (data) {
+                                if (data === null) {
+                                    return "";
+                                }
+
+                                const date = new Date(data)
+                                return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+                            }
+                        },
+                        {
+                            data: "dateReturned",
+                            render: function (data) {
+                                if (data === "" || data === null) {
+                                    return "<span class='rentalStatus' id='in-progress'>In Progress</span>";
+                                }
+
+                                return "<span class='rentalStatus' id='completed'>Completed</span>";
+                            }
+                        },
+                        {
+                            data: null,
+                            render: function (data) {
+                                if (data.dateReturned === null) {
+                                    return "<button class ='btn btn-primary js-return returnButton' data-rental-id='" + data.id + "' data-movie-id='" + data.movie.id + "'>Return</button>";
+                                }
+
+                                return "<button class='btn btn-secondary returnButton'>Return</button>";
+                            }
+                        }
+                    ]
+                });
+
+                $("#rentals").on("click", ".js-return", function () {
+                    let button = $(this)
+
+                    bootbox.confirm("Are you sure you want to return the movie?", function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/rentals/" + button.attr("data-rental-id"),
+                                method: "PUT"
+                            })
+
+                            $.ajax({
+                                url: "/api/movies/" + button.attr("data-movie-id"),
+                                method: "PUT"
+                            })
+                        }
+                    })
+                })
+            })
+        </script>
+    } 

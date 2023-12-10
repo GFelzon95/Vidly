@@ -23,8 +23,8 @@ namespace Vidly.Controllers.Api
         public IHttpActionResult GetMovies(string query = null)
         {
             var moviesQuery = _context.Movies
-                .Include(m => m.Genre)
-                .Where(m => m.NumberAvailable > 0);
+                .Include(m => m.Genre);
+                //.Where(m => m.NumberAvailable > 0);
 
 
             if (!String.IsNullOrWhiteSpace(query))
@@ -69,7 +69,7 @@ namespace Vidly.Controllers.Api
 
         //PUT api/movies/1
         [HttpPut]
-        public void UpdateMovie(int id, MovieDto movieDto)
+        public void UpdateMovie(int id)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -79,13 +79,7 @@ namespace Vidly.Controllers.Api
             if (movieInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            Mapper.Map(movieDto, movieInDb);
-
-            //movieInDb.Name = movie.Name;
-            //movieInDb.ReleaseDate = movie.ReleaseDate;
-            //movieInDb.GenreId = movie.GenreId;
-            //movieInDb.NumberInStock = movie.NumberInStock;
-
+            movieInDb.NumberAvailable++;
             _context.SaveChanges();
         }
 

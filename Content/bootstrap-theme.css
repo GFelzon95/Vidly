@@ -54,3 +54,14 @@
     float: right;
 }
 
+.rentalStatus#in-progress {
+    color: red;
+}
+
+.rentalStatus#completed {
+    color: green;
+}
+
+.returnButton {
+    margin-left: 18%;
+}

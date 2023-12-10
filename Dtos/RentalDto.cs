@@ -9,10 +9,17 @@ namespace Vidly.Dtos
 {
     public class RentalDto
     {
-        public int CustomerId { get; set; }
+        public int Id { get; set; }
 
-        public List<int> MovieIds { get; set; }
+        [Required]
+        public Customer Customer { get; set; }
 
+        [Required]
+        public Movie Movie { get; set; }
+
+        public DateTime DateRented { get; set; }
+
+        public DateTime? DateReturned { get; set; }
         public decimal Price { get; set; }
     }
 }

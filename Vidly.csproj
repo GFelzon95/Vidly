@@ -206,6 +206,7 @@
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\Api\MoviesController.cs" />
     <Compile Include="Controllers\Api\NewRentalsController.cs" />
+    <Compile Include="Controllers\Api\RentalsController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Dtos\GenreDto.cs" />
     <Compile Include="Dtos\MembershipTypeDto.cs" />
     <Compile Include="Dtos\MovieDto.cs" />
+    <Compile Include="Dtos\NewRentalDto.cs" />
     <Compile Include="Dtos\RentalDto.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
@@ -737,6 +739,7 @@
     <Content Include="Views\Rentals\New.cshtml" />
     <Content Include="Views\Users\List.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Rentals\Index.cshtml" />
     <None Include="Web.Testing.config" />
   </ItemGroup>
   <ItemGroup>
